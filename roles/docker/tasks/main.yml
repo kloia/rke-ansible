@@ -1,0 +1,12 @@
+---
+
+- name: Download and install Docker with Rancher's script
+  shell: curl https://releases.rancher.com/install-docker/18.09.sh | sh
+
+- name: Create a user for Docker
+  shell: sudo usermod -aG docker kloia
+
+
+  
+
+

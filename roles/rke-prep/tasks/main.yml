@@ -1,0 +1,19 @@
+---
+
+  #- name: Run rancher requirement checker
+  #  script:
+  #    cmd: files/rancher-requirements-check.sh
+
+
+  # Buraya reboot etme koy ansible-native
+
+  - name: Copy file with owner and permissions
+    copy:
+      src: files/rancher-requirements-check.sh
+      dest: /home/kloia/rancher-requirements-check.sh
+      owner: kloia
+      mode: a+x
+
+  - name: Run rancher-requirement
+    become: true
+    shell: ./rancher-requirements-check.sh

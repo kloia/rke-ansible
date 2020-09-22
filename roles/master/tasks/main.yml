@@ -1,0 +1,53 @@
+---
+  - #name: Copy public keys to hosts
+    #shell: Ansible file copy
+
+  - name: Download kubectl
+    shell: curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl" && sudo mv kubectl /usr/local/bin/ && sudo chmod +x /usr/local/bin/kubectl ## buna da yap file donwload ansible
+
+  - name: Get Helm
+    shell: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
+  - name: Get jq
+    become: true
+    get_url:
+      url: https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
+      dest: /usr/local/bin/jq
+      mode: a+x
+
+  - name: Get yq
+    become: true
+    get_url:
+      url: https://github.com/mikefarah/yq/releases/download/3.3.4/yq_linux_amd64
+      dest: /usr/local/bin/yq
+      mode: a+x
+
+  - name: Install unzip
+    become: true
+    yum:
+      name: unzip
+      state: latest
+
+  - name: Get AWS-cli
+    get_url:
+      url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+      dest: /home/kloia/awscliv2.zip
+
+  - name: Extract aws-cli
+    unarchive:
+      src: /home/kloia/awscliv2.zip
+      dest: /home/kloia/
+      remote_src: yes
+
+  - name: Install cli
+    become: true
+    shell: /home/kloia/aws/install
+
+  - name: Get RKE
+    become: true
+    get_url:
+      url: https://github.com/rancher/rke/releases/download/v1.1.7/rke_linux-amd64
+      dest: /usr/local/bin/rke
+      mode: a+x
+
+  # #- name: AWS Configure? ## bunu atla ama aslen template ile yapılıyor
