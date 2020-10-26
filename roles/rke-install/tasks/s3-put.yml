@@ -1,0 +1,22 @@
+---
+
+- name: PUT RKE state to s3
+  amazon.aws.aws_s3:
+    bucket: "{{ aws_bucket_name }}"
+    region: "{{ aws_region }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"    
+    object: "rancher/{{ project_environment }}/local_cluster.rkestate"
+    src: "{{ lookup('env', 'HOME') }}/rke/local_cluster.rkestate"
+    mode: put
+
+- name: PUT RKE kubeconfig to s3
+  amazon.aws.aws_s3:
+    bucket: "{{ aws_bucket_name }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"    
+    region: "{{ aws_region }}"
+    object: "rancher/{{ project_environment }}/kube_config_local_cluster.yaml"
+    src: "{{ lookup('env', 'HOME') }}/rke/kube_config_local_cluster.yaml"
+    mode: put
+

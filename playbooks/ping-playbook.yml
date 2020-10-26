@@ -1,0 +1,8 @@
+---
+- hosts: jump
+  connection: local
+  tasks:
+    - name: pinging machine
+      ping:
+      retries: 10
+      delay: 5

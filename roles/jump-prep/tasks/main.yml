@@ -1,0 +1,9 @@
+---
+- name: Download kubectl
+  shell: curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl" && sudo mv kubectl /usr/local/bin/ && sudo chmod +x /usr/local/bin/kubectl ## buna da yap file donwload ansible
+
+- name: Get Helm
+  shell: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
+- include: rke.yml
+- include: ansible-prep.yml  

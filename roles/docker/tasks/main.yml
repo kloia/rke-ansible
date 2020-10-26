@@ -1,12 +1,20 @@
 ---
 
+- name: collect facts about system services
+  service_facts:
+  register: services_state
+
 - name: Download and install Docker with Rancher's script
-  shell: curl https://releases.rancher.com/install-docker/18.09.sh | sh
+  shell: curl https://releases.rancher.com/install-docker/19.03.sh | sh
+  when: services_state.ansible_facts.services['docker.service'] is not defined 
 
 - name: Create a user for Docker
-  shell: sudo usermod -aG docker kloia
+  shell: "sudo usermod -aG docker {{ ansible_user }}"
+  when: services_state.ansible_facts.services['docker.service'] is not defined
 
-
-  
-
+- name: Start service docker, if not started and enable
+  service:
+    name: docker
+    state: started
+    enabled: true
 

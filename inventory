@@ -1,0 +1,11 @@
+[jump]
+localhost ansible_connection=local ansible_python_interpreter=python
+
+[servers]
+172.31.5.186
+172.31.11.177
+172.31.11.101
+
+[all:vars]
+ansible_user=ec2-user
+ansible_ssh_private_key_file=/home/ec2-user/ansible.pem

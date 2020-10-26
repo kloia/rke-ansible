@@ -1,0 +1,22 @@
+---  
+- hosts: jump
+  connection: local
+  roles:
+    - jump-prep
+  
+- hosts: servers
+  become: true
+  gather_facts: true
+  roles:
+    - worker-prep
+    - docker
+
+- hosts: jump
+  connection: local
+  roles:
+    - rke-install
+    - after-install
+  vars_files:
+    - ../vars/general-config.yml
+    - ../vars/aws-config.yml
+    - ../vars/aws-secret.yml

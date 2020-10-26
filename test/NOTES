@@ -1,0 +1,23 @@
+sudo yum-config-manager --add-repo http://mirror.centos.org/centos/7/extras/x86_64/
+
+yum deplist container-selinux-2.119.2-1.911c772.el7_8.noarch | awk '/dependency:/ {print $2}' | sort -u | sudo xargs yum -y install
+
+
+
+
+
+
+
+
+cat << EOF > /etc/environment
+LANG=en_US.utf-8
+LC_ALL=en_US.utf-8
+EOF
+
+
+curl -s https://api.github.com/repos/rancher/rke/releases/latest \
+| grep "linux-amd64" \
+| cut -d : -f 2,3 \
+| tr -d \" \
+| sed -n 2p \
+| wget -qi - 

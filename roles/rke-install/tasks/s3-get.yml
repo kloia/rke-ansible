@@ -1,0 +1,14 @@
+---
+
+- name: GET RKE state from s3
+  amazon.aws.aws_s3:
+    bucket: "{{ aws_bucket_name }}"
+    region: "{{ aws_region }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    object: "rancher/{{ project_environment }}/local_cluster.rkestate"
+    dest: "{{ lookup('env', 'HOME') }}/rke/local_cluster.rkestate"
+    mode: get
+  ignore_errors: true
+  register: get_s3_object
+

@@ -1,0 +1,9 @@
+---
+- name: Copy kubeconfig to Default Location for kubectl
+  copy:
+    src: "{{ lookup('env', 'HOME') }}/rke/kube_config_local_cluster.yaml"
+    dest: "{{ lookup('env', 'HOME') }}/.kube/config"
+    remote_src: yes
+
+- name: Add Rancher Helm Repo
+  command: helm repo add rancher-latest https://releases.rancher.com/server-charts/latest

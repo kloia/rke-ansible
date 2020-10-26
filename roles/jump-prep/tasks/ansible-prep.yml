@@ -1,0 +1,8 @@
+--- 
+- name: Install ansible pip dependencies
+  become: true
+  pip:
+    name:
+      - botocore
+      - boto
+      - boto3

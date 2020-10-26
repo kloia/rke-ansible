@@ -1,0 +1,25 @@
+nodes:
+  - address: 63.35.214.72
+    internal_address: 172.31.5.186
+    user: ec2-user
+    ssh_agent_auth: true
+    ssh_key_path: /home/ec2-user/ansible.pem
+    role: [controlplane, etcd, worker]
+  - address: 34.240.84.244
+    internal_address: 172.31.11.177
+    user: ec2-user
+    ssh_agent_auth: true
+    ssh_key_path: /home/ec2-user/ansible.pem
+    role: [controlplane, etcd, worker]
+  - address: 3.250.231.86
+    internal_address: 172.31.11.101
+    user: ec2-user
+    ssh_agent_auth: true
+    ssh_key_path: /home/ec2-user/ansible.pem
+    role: [controlplane, etcd, worker]
+
+ingress:
+  provider: nginx
+  options:
+    use-forwarded-headers: "true"
+

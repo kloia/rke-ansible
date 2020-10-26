@@ -1,0 +1,27 @@
+---
+- include: s3-get.yml
+  when: aws_enabled == true
+
+- name: Create rke directory if it does not exist
+  file:
+    path: "{{ lookup('env', 'HOME') }}/rke/"
+    state: directory
+
+- name: Check if rke config file is there
+  stat:
+    path: "{{ lookup('env', 'HOME') }}/rke/local_cluster.yaml"
+  register: file_details
+
+- name: Copy rke config file
+  copy:
+    src: local_cluster.yaml
+    dest: "{{ lookup('env', 'HOME') }}/rke/"
+  when: file_details.stat.exists == false
+
+- name: RKE UP
+  command: rke up --config local_cluster.yaml
+  args:
+    chdir: "{{ lookup('env', 'HOME') }}/rke/"
+
+- include: s3-put.yml
+  when: aws_enabled == true

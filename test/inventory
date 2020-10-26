@@ -1,0 +1,11 @@
+[jump]
+localhost ansible_connection=local ansible_python_interpreter=python
+
+[servers]
+192.168.44.188 
+192.168.44.189 
+192.168.44.190 
+
+[all:vars]
+ansible_user=vagrant
+ansible_ssh_private_key_file=/tmp/id_rsa
