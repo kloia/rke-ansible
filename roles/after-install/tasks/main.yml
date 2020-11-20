@@ -1,4 +1,9 @@
 ---
+- name: Ensure kube directory exists in jump
+  file:
+    state: directory
+    path: ~/.kube
+
 - name: Copy kubeconfig to Default Location for kubectl
   copy:
     src: "{{ lookup('env', 'HOME') }}/rke/kube_config_local_cluster.yaml"

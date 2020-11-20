@@ -19,11 +19,8 @@
     - iptable_raw
     - nf_conntrack_netlink
     - nf_conntrack
-    - nf_conntrack_ipv4
     - nf_defrag_ipv4
     - nf_nat 
-    - nf_nat_ipv4
-    - nf_nat_masquerade_ipv4
     - nfnetlink
     - udp_tunnel
     - veth
@@ -39,3 +36,13 @@
     - xt_set
     - xt_statistic
     - xt_tcpudp
+
+- name: Add the kernel modules rancher needs if kernel version is below 5.3
+  modprobe:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - nf_nat_masquerade_ipv4
+    - nf_conntrack_ipv4
+    - nf_nat_ipv4
+  when: ansible_kernel is version('5.3', '<')
