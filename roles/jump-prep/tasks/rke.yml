@@ -1,6 +1,6 @@
 ---
 - name: Get latest RKE download URL
-  command : curl -s https://api.github.com/repos/rancher/rke/releases/latest
+  command : curl -s https://api.github.com/repos/rancher/rke/releases
   register: rke_json
 
 - name: Set rke_object variable
