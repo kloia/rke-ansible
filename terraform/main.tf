@@ -6,7 +6,7 @@ module "rke-cluster" {
   ami                    = "ami-0dc8d444ee2a42d8a"
   instance_type          = "t3.xlarge"
   key_name               = "akin"
-  vpc_security_group_ids = ["sg-02dc15f8d9bb58264"]
+  vpc_security_group_ids = ["sg-06fc2608409841b74"]
   subnet_id              = "subnet-f9b3fb9d"
   root_block_device      = [
     {
@@ -28,7 +28,7 @@ module "ec2-instance-jump" {
   ami                    = "ami-0dc8d444ee2a42d8a"
   instance_type          = "t3.medium"
   key_name               = "akin"
-  vpc_security_group_ids = ["sg-02dc15f8d9bb58264"]
+  vpc_security_group_ids = ["sg-06fc2608409841b74"]
   subnet_id              = "subnet-f9b3fb9d"
   root_block_device      = [
     {
