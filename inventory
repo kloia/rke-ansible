@@ -2,10 +2,10 @@
 localhost ansible_connection=local ansible_python_interpreter=python
 
 [servers]
-172.31.5.186
-172.31.11.177
-172.31.11.101
+172.31.5.162
+172.31.10.114
+172.31.10.214
 
 [all:vars]
-ansible_user=ec2-user
-ansible_ssh_private_key_file=/home/ec2-user/ansible.pem
+ansible_user=ubuntu
+ansible_ssh_private_key_file=~/akin.pem

@@ -2,3 +2,5 @@
 .idea/*
 roles/.DS_Store
 vars/aws-secret.yml
+*.terraform
+*.tfstate*
