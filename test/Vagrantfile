@@ -56,12 +56,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         box.vm.provision "shell", inline: "cp /vagrant/test/ansible.cfg /etc/ansible/ansible.cfg", privileged: true, run: "always"
         box.vm.provision "shell", inline: "echo 'cd /vagrant/test' >> /home/vagrant/.bashrc"
 
-        box.vm.provision "ansible_local" do |ansible|
-          ansible.limit = "all"
-          ansible.install_mode = "pip"
-          ansible.playbook = "/vagrant/playbooks/ping-playbook.yml"
-          ansible.inventory_path = "/vagrant/test/inventory"
-        end
+        box.vm.provision "shell", inline: "sudo apt-get install -y python3-distutils && curl -s https://bootstrap.pypa.io/get-pip.py | sudo python3"
+        box.vm.provision "shell", inline: "pip install ansible"
 
        # box.vm.provision "shell", inline: "ansible-galaxy collection install amazon.aws", privileged: true
         box.vm.provision "shell", inline: "bash /vagrant/test/provision.sh"

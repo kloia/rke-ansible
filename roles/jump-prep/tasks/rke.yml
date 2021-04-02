@@ -5,7 +5,7 @@
 
 - name: Set rke_object variable
   set_fact:
-    rke_object: "{{ rke_json.stdout | from_json }}"
+    rke_object: "{{ rke_json.stdout | replace('v', '') | from_json }}"
 
 - name: Get max version of RKE
   set_fact:
@@ -13,7 +13,7 @@
   with_items: "{{ rke_object }}"
   loop_control:
     label: "{{ item.tag_name }}"
-  when: not item.prerelease and not item.draft and max_version |default('0') is version(item.tag_name, '<')
+  when: not item.prerelease and not item.draft and max_version |default("1.0.0") is version(item.tag_name, '<')
 
 - name: Set rke_download_url variable
   set_fact:
