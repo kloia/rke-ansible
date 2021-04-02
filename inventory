@@ -1,5 +1,5 @@
 [jump]
-localhost ansible_connection=local ansible_python_interpreter=python
+localhost ansible_connection=local ansible_python_interpreter=python3
 
 [servers]
 172.31.5.162
