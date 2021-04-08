@@ -1,27 +1,18 @@
 ---
 - name: Get latest RKE download URL
-  command : curl -s https://api.github.com/repos/rancher/rke/releases
+  command : curl -s https://api.github.com/repos/rancher/rke/releases/latest
   register: rke_json
 
 - name: Set rke_object variable
   set_fact:
-    rke_object: "{{ rke_json.stdout | replace('v', '') | from_json }}"
+    rke_object: "{{ rke_json.stdout | from_json }}"
 
-- name: Get max version of RKE
-  set_fact:
-    max_version: "{{ item.tag_name }}"
-  with_items: "{{ rke_object }}"
-  loop_control:
-    label: "{{ item.tag_name }}"
-  when: not item.prerelease and not item.draft and max_version |default("1.0.0") is version(item.tag_name, '<')
 
 - name: Set rke_download_url variable
   set_fact:
-    rke_download_url: "{{ (item.assets|selectattr('browser_download_url','contains','linux-amd64')|first).browser_download_url }}"
-  with_items: "{{ rke_object }}"
+    rke_download_url: "{{ (rke_object.assets|selectattr('browser_download_url','contains','linux-amd64')|first).browser_download_url }}"
   loop_control:
-    label: "{{ item.tag_name }}"
-  when: item.tag_name == max_version
+    label: "{{ rke_object.tag_name }}"
 
 - name: Get RKE
   become: true
