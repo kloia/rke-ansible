@@ -9,12 +9,9 @@ s3 integration saves rke state file and kubeconfig to target bucket which can be
 ### How to use this playbook
 
 - You need to clone this on jump server for the installation. 
-- You need to provide servers section for the "inventory" file. 
-- You need to provide rke config yaml(is not automated since you may need delicate configuration), which located at "./roles/rke-install/files/local_cluster.yaml". Demo config yaml is there, you can just swap few things and ready to go.
-- Check vars at "./vars" directory and set your aws config(if exists) and set project environment.
-- Set "ansible_user" and "ansible_ssh_private_key_file" in "inventory" file.
-- Set "ansible_ssh_private_key_file" and "remote_user" in "ansible.cfg" file.(Which means set up ssh keys.)
-- Make sure you have python 2.7 and pip installed.
+- You need to provide configuration variables in the "./vars/general-config.yaml" (server ip addresses, aws config etc.)
+- You can configure extra rke configs in "./roles/rke-install/templates/local_cluster.yaml" file.
+- Make sure you have minimum python 2.7 and pip installed.
 - Install ansible via pip "pip install ansible".(not automated since the OS may not have python installed).
 - Run "provision.sh".
 

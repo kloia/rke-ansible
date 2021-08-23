@@ -2,10 +2,10 @@
 localhost ansible_connection=local ansible_python_interpreter=python3
 
 [servers]
-172.31.5.162
-172.31.10.114
-172.31.10.214
+node1  ansible_host="{{ node1_ip }}"
+node2  ansible_host="{{ node2_ip }}"
+node3  ansible_host="{{ node3_ip }}"
 
 [all:vars]
 ansible_user=ubuntu
-ansible_ssh_private_key_file=~/akin.pem
+ansible_ssh_private_key_file={{ ssh_key_path }}

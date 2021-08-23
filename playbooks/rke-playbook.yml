@@ -3,6 +3,8 @@
   connection: local
   roles:
     - jump-prep
+  vars_files:
+    - ../vars/general-config.yml
   
 - hosts: servers
   become: true
@@ -10,6 +12,8 @@
   roles:
     - worker-prep
     - docker
+  vars_files:
+    - ../vars/general-config.yml
 
 - hosts: jump
   connection: local

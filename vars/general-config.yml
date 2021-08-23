@@ -1,3 +1,9 @@
 ---
+rke_tag: latest
+node1_ip: x.x.x.x
+node2_ip: x.x.x.x
+node3_ip: x.x.x.x
+ssh_key_path: /tmp/id_rsa
+ssh_user: ubuntu
 aws_enabled: false
 project_environment: prod

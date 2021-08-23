@@ -1,0 +1,16 @@
+---
+
+nodes:
+{% for host in groups['servers'] %}
+  - address: {{ hostvars[host]['ansible_default_ipv4']['address'] }}
+    internal_address: {{ hostvars[host]['ansible_default_ipv4']['address'] }}
+    user: {{ ssh_user }}
+    ssh_agent_auth: true
+    ssh_key_path: {{ ssh_key_path }} 
+    role: [controlplane, etcd, worker]
+{% endfor %}
+
+ingress:
+  provider: nginx
+  options:
+    use-forwarded-headers: "true"
