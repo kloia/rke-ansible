@@ -8,6 +8,7 @@ nodes:
     ssh_agent_auth: true
     ssh_key_path: {{ ssh_key_path }} 
     role: [controlplane, etcd, worker]
+    enable_cri_dockerd: true
 {% endfor %}
 
 ingress:
