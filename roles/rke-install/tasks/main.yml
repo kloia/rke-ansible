@@ -15,7 +15,7 @@
 - name: Create/update RKE config file
   template:
     src: local_cluster.yaml
-    dest: "/home/ubuntu/rke/local_cluster.yaml"
+    dest: "{{ lookup('env', 'HOME')}}/rke/local_cluster.yaml"
 
 - name: RKE UP
   command: rke up --config local_cluster.yaml
