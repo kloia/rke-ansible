@@ -1,6 +1,6 @@
 ---
 rke_tag: latest
-node1_ip: 10.56.2.321
+node1_ip: x.x.x.x
 node2_ip: x.x.x.x
 node3_ip: x.x.x.x
 ssh_key_path: /tmp/id_rsa
